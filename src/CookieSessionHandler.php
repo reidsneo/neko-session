@@ -12,7 +12,7 @@ class CookieSessionHandler implements SessionHandlerInterface {
     
     protected $encrypt = false;
     
-    public function __construct($cookie_name = 'rksess', array $configs = array()) {
+    public function __construct($cookie_name = 'nekoses', array $configs = array()) {
         $this->cookie_name = $cookie_name;
         
         $default_configs = array(

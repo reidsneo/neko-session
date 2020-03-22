@@ -14,7 +14,7 @@ class SessionManager {
     
     public function __construct(SessionHandlerInterface $handler = null, $flash_key = 'flash') {
         if (session_status() == PHP_SESSION_ACTIVE) {
-            throw new Exception("You don't need to manually use session_start() if you want to use 'rakit/session' library");
+            //throw new Exception("You don't need to manually use session_start()");
         }
         
         $this->handler = $handler;
