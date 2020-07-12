@@ -2,7 +2,7 @@
 
 use SessionHandlerInterface;
 use Exception;
-use Neko\Session\CookieSessionHandler;
+//use Neko\Session\CookieSessionHandler;
 
 class SessionManager {
     
@@ -13,16 +13,18 @@ class SessionManager {
     protected $flash_key = array();
     
     public function __construct(SessionHandlerInterface $handler = null, $flash_key = 'flash') {
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            //throw new Exception("You don't need to manually use session_start()");
-        }
+       // if (session_status() == PHP_SESSION_ACTIVE) {
+       //     throw new Exception("You don't need to manually use session_start()");
+       // }
         
         $this->handler = $handler;
         $this->flash_key = $flash_key;
         
         if ($this->handler) session_set_save_handler($handler);
-        
-        session_start();
+
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         
         $this->flash = new Flash($this, $flash_key);
     }
