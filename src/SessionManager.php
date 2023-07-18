@@ -21,8 +21,8 @@ class SessionManager {
         $this->flash_key = $flash_key;
         
         if ($this->handler) session_set_save_handler($handler);
-
-        if(session_status() != PHP_SESSION_ACTIVE){
+ 
+        if( empty(session_id()) && !headers_sent()){
             session_start();
         }
         
@@ -50,6 +50,11 @@ class SessionManager {
         if (!$include_flash) unset($sess[$this->flash_key]);
         
         return $sess;
+    }
+
+    public function flush() {
+        unset($_SESSION);
+        session_destroy();
     }
     
     public function remove($key) {
